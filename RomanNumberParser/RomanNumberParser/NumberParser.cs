@@ -19,51 +19,23 @@ namespace RomanNumberParser
             int M = 1000;
             int returnResult = -1; // set default fail
 
+            //all the invalid combinations in a collection
+            var notValid = new List<string> { "LC", "LL", "DD", "VV", "IIIII", "XXXXX", "CCCCC", "DM", "VX" };
+
             // set default return vairable
             bool validNumeral = false;
 
-            //need to apply the rules
-
-            // 3. count rule if only 0  or 1 occurence of D, L, V
-            if (Numerals.Count(x => x == 'D') < 2)
+            //need to apply the rules 2 and 3 against the invalid combinations
+            foreach (string test in notValid)
             {
-                validNumeral = true;
+                validNumeral = ((Numerals.IndexOf(test) > -1) ? false : true);
+                //discover an invalid string leave loop.
+                if (!validNumeral)
+                {
+                    break;
+                }
             }
-
-            if (Numerals.Count(x => x == 'L') < 2)
-            {
-                validNumeral = true;
-            }
-
-            if (Numerals.Count(x => x == 'V') < 2)
-            {
-                validNumeral = true;
-            }
-
-            // rule 2 makes no sense as written - what it actually means is that you can't have more than four of I, X, or C in sequence in the Roman Number
-            //if valid Numeral is false then the Roman Number  string is invalid no need to check further
-            // check I
-            if (validNumeral)
-            {
-                string lI = "IIIII";
-                validNumeral = ((Numerals.IndexOf(lI) > 0) ? false : true);
-            }
-                //Check V only if still valid
-                
-            if (validNumeral)
-            {
-                string lX = "XXXXX";
-                validNumeral = ((Numerals.IndexOf(lX) > 0) ? false : true);
-            }
-
-
-            // check L only if still valid
-            if (validNumeral)
-            {
-                string lC = "CCCCC";
-                validNumeral = ((Numerals.IndexOf(lC) > 0) ? false : true);
-            }
-
+                        
 
             //if valid Numeral is false then the Roman Number string is invalid no need to to do this
             if (validNumeral)
@@ -80,15 +52,22 @@ namespace RomanNumberParser
                     if (z == 'I')
                     {
                         //is it leading V or X
-                        if (Numerals[i + 1] == 'V')
+                        if (i < (Numerals.Length - 1))
                         {
-                            totalValue += (V - I);
-                            i++; //advance the counter
-                        }
-                        else if (Numerals[i + 1] == 'X')
-                        {
-                            totalValue += (X - I);
-                            i++; //advance the counter
+                            if (Numerals[i + 1] == 'V')
+                            {
+                                totalValue += (V - I);
+                                i++; //advance the counter
+                            }
+                            else if (Numerals[i + 1] == 'X')
+                            {
+                                totalValue += (X - I);
+                                i++; //advance the counter
+                            }
+                            else
+                            {
+                                totalValue += I;
+                            }
                         }
                         else
                         {
@@ -105,16 +84,23 @@ namespace RomanNumberParser
                     // 1.c deal with X
                     if (z == 'X')
                     {
-                        //is it leading V or X
-                        if (Numerals[i + 1] == 'C')
+                        if (i < (Numerals.Length - 1))
                         {
-                            totalValue += (C - X);
-                            i++; //advance the counter
-                        }
-                        else if (Numerals[i + 1] == 'L')
-                        {
-                            totalValue += (L - X);
-                            i++; //advance the counter
+                            //is it leading  C or L
+                            if (Numerals[i + 1] == 'C')
+                            {
+                                totalValue += (C - X);
+                                i++; //advance the counter
+                            }
+                            else if (Numerals[i + 1] == 'L')
+                            {
+                                totalValue += (L - X);
+                                i++; //advance the counter
+                            }
+                            else
+                            {
+                                totalValue += X;
+                            }
                         }
                         else
                         {
@@ -131,16 +117,23 @@ namespace RomanNumberParser
                     // 1.d deal with C
                     if (z == 'C')
                     {
-                        //is it leading D or M
-                        if (Numerals[i + 1] == 'D')
+                        if (i < (Numerals.Length - 1))
                         {
-                            totalValue += (D - C);
-                            i++; //advvance the counter
-                        }
-                        else if (Numerals[i + 1] == 'M')
-                        {
-                            totalValue += (M - C);
-                            i++; //advvance the counter
+                            //is it leading D or M
+                            if (Numerals[i + 1] == 'D')
+                            {
+                                totalValue += (D - C);
+                                i++; //advvance the counter
+                            }
+                            else if (Numerals[i + 1] == 'M')
+                            {
+                                totalValue += (M - C);
+                                i++; //advvance the counter
+                            }
+                            else
+                            {
+                                totalValue += C;
+                            }
                         }
                         else
                         {
