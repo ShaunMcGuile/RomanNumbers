@@ -20,7 +20,7 @@ namespace RomanNumberParser
             int returnResult = -1; // set default fail
 
             //all the invalid combinations in a collection
-            var notValid = new List<string> { "LL", "DD", "VV", "IIIII", "XXXXX", "CCCCC", "IL", "IC", "ID", "IM", "VX", "VL", "VC", "VD", "VM", "XL", "XC", "XD", "XM", "LC", "LD", "LM", "CM", "DM" };
+            var notValid = new List<string> { "LL", "DD", "VV", "IIIII", "XXXXX", "CCCCC", "IL", "IC", "ID", "IM", "VX", "VL", "VC", "VD", "VM", "XD", "XM", "LC", "LD", "LM", "DM" };
 
             // set default return vairable
             bool validNumeral = false;
