@@ -165,19 +165,5 @@ namespace RomanNumberParser
             return returnResult;
         }
 
-        private bool checkExceed(int X, int C, int M, int checkVal)
-        {
-            bool validNumeral = false;
-            // check values
-            if (!((X < checkVal) || (C < checkVal) || (M < checkVal)))
-            {
-                validNumeral = true;
-            }
-
-            return validNumeral;
-        }
-
-
-
     }
 }
