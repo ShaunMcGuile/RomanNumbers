@@ -40,45 +40,29 @@ namespace RomanNumberParser
                 validNumeral = true;
             }
 
-            /* rule 2 makes no sense
+            // rule 2 makes no sense as written - what it actually means is that you can't have more than four of I, X, or C in sequence in the Roman Number
             //if valid Numeral is false then the Roman Number  string is invalid no need to check further
+            // check I
             if (validNumeral)
             {
-                //2. Exceed rule M, C, and X cannot be equalled or exceeded by smaller denominations? Red herring rule, or wrong translation?
-                //get last indecies of the characters other than M, C and X and the first for M, C, and X
-
-                int lI = Numerals.LastIndexOf('I');
-                int lV = Numerals.LastIndexOf('V');
-                int fX = Numerals.IndexOf('X');
-                int lL = Numerals.LastIndexOf('L');
-                int fC = Numerals.IndexOf('C');
-                int lD = Numerals.LastIndexOf('D');
-                int fM = Numerals.IndexOf('M');
-                               
-                // check I
-                validNumeral = checkExceed(fX, fC, fM, lI);
-
-
+                string lI = "IIIII";
+                validNumeral = ((Numerals.IndexOf(lI) > 0) ? false : true);
+            }
                 //Check V only if still valid
                 
-                if (validNumeral)
-                {
-                    validNumeral = checkExceed(fX, fC, fM, lV);;
-                }
-
-                // check L only if still valid
-                if (validNumeral)
-                {
-                    validNumeral = checkExceed(fX, fC, fM, lL);;
-                }
+            if (validNumeral)
+            {
+                string lX = "XXXXX";
+                validNumeral = ((Numerals.IndexOf(lX) > 0) ? false : true);
+            }
 
 
-                // check D only if still valid
-                if (validNumeral)
-                {
-                    validNumeral = checkExceed(fX, fC, fM,lD);
-                }
-            } */
+            // check L only if still valid
+            if (validNumeral)
+            {
+                string lC = "CCCCC";
+                validNumeral = ((Numerals.IndexOf(lC) > 0) ? false : true);
+            }
 
 
             //if valid Numeral is false then the Roman Number string is invalid no need to to do this
